@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "main.h"
 
-#define STEP 2
+#define STEP 12
 
 /**
  * main - Entry point
@@ -64,6 +64,6 @@ int main(void)
 #if STEP >= 12
     _printf("Unknown:[%r]\n");
     printf("Unknown:[%r]\n");
-#endif 
+#endif
    return (0);
 }
