@@ -3,32 +3,26 @@
 int format_int(int n, char b[], int len);
 int format_uns_int(unsigned int n, char b[], int len);
 int _putchar(char c, int len);
+int (*get_format_func(const char *format, int i))(const char *, va_list, int);
 
 int _printf(const char *format, ...)
 {
-	int i = 0, j = 0, k = 0, c = 0, len = 0;
+	int i = 0, len = 0;
 	va_list args;
 	int tmp;
 	unsigned int utmp;
 	char b[20];
+
+	int (*ptr)(const char *, va_list, int);
 
 	va_start(args, format);
 	for (i = 0; format[i]; i++)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == 'd' || format[i + 1] == 'i')
-			{
-				tmp = va_arg(args, int);
-				len += format_int(tmp, b, len);
-				i += 2;
-			}
-			else if (format[i + 1] == 'u')
-			{
-				utmp = va_arg(args, unsigned int);
-				len += format_uns_int(utmp, b, len);
-				i += 2;
-			}
+			ptr = get_format_func(format, i);
+			len += ptr(format, args, i);
+			i += 2;
 		}
 
 		len += _putchar(format[i], len);
