@@ -2,21 +2,16 @@
 
 /**
 * print_uns_int - prints an unsigned integer
-* @format: the argument with the string to be printed and any format specifier
 * @args: the argument containing an unsigned int
-* @i: the index of %u in format, i.e. format[i]
 * Return: returns the number of characters printed
 */
-int print_uns_int(const char *format, va_list args, int i)
+int print_uns_int(va_list args)
 {
 	unsigned int n = va_arg(args, unsigned int);
 	unsigned int c = 0, n1 = n;
 	int j = 0;
 	int len = 0;
 	char b[20];
-
-	(void) format;
-	(void) i;
 
 	while (1)
 	{

@@ -1,6 +1,6 @@
 #include "main.h"
 
-int (*get_format_func(const char *format, int i))(const char *, va_list, int);
+int (*get_format_func(const char *format, int i))(va_list);
 
 /**
 * _printf - a function that prints formated output to stdout
@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 {
 	int i = 0, len = 0;
 	va_list args;
-	int (*ptr)(const char *, va_list, int);
+	int (*ptr)(va_list);
 
 	va_start(args, format);
 	for (i = 0; format[i]; i++)
@@ -24,7 +24,7 @@ int _printf(const char *format, ...)
 				_putchar('%', len);
 				continue;
 			}
-			len += ptr(format, args, i);
+			len += ptr(args);
 			i += 2;
 		}
 
