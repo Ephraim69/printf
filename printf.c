@@ -1,31 +1,17 @@
 #include "main.h"
 
-#define P
-char *format_int(int n, char b[]);
+int format_int(int n, char b[], int len);
 char *format_uns_int(unsigned int n, char b[]);
-void _putchar(char c);
-#ifdef M
-int main(void)
-{
-	print_num(-762534);
-}
-#endif
+int _putchar(char c, int len);
 
-#ifdef P
 int _printf(const char *format, ...)
 {
-	int i = 0, j = 0, k = 0, c = 0;
+	int i = 0, j = 0, k = 0, c = 0, len = 0;
 	va_list args;
 	int tmp;
 	unsigned int utmp;
-	char *buf, *numStr;
 	char b[20];
 
-	while (format[c++]);
-
-	buf = malloc(sizeof(char) * (c * 2));
-	if (buf == NULL)
-		return (-1);
 	va_start(args, format);
 	for (i = 0; format[i]; i++)
 	{
@@ -34,15 +20,10 @@ int _printf(const char *format, ...)
 			if (format[i + 1] == 'd' || format[i + 1] == 'i')
 			{
 				tmp = va_arg(args, int);
-				numStr = format_int(tmp, b);
-
-				for (j = 0; numStr[j] != '\0'; j++)
-				{
-					buf[k++] = numStr[j];
-				}
+				len += format_int(tmp, b, len);
 				i += 2;
 			}
-			else if (format[i + 1] == 'u')
+		/*	else if (format[i + 1] == 'u')
 			{
 				utmp = va_arg(args, unsigned int);
 				numStr = format_uns_int(utmp, b);
@@ -52,32 +33,25 @@ int _printf(const char *format, ...)
 					buf[k++] = numStr[j];
 				}
 				i += 2;
-			}
+			}	*/
 		}
 
-		buf[k++] = format[i];
+		len += _putchar(format[i], len);
 	}
 
 	va_end(args);
-	buf[k] = '\0';
-	c = 0;
-	i = 0;
-	while (buf[i++])
-		c++;
 
-	write (1, buf, c);
-
-	free(buf);
-	return (c);
+	return (len);
 }
 
-char *format_int(int n, char b[])
+int format_int(int n, char b[], int len)
 {
 
 	int i = 0, c = 0, c1 = 0;
 	int n1 = n;
 	int isNeg = 0;
 	char tmp;
+	len = 0;
 
 	if (n < 0)
 	{
@@ -111,7 +85,9 @@ char *format_int(int n, char b[])
 	}
 	b[c] = '\0';
 
-	return (b);
+	for (i = 0; b[i] != '\0'; i++)
+		len += _putchar(b[i], len);
+	return (len);
 
 }
 
@@ -151,8 +127,11 @@ char *format_uns_int(unsigned int n, char b[])
 
 }
 
-void _putchar(char c)
+int _putchar(char c, int len)
 {
+	len = 0;
+
 	write(1, &c, 1);
+	len++;
+	return (len);
 }
-#endif
