@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include "main.h"
 
-#define STEP 12
+#define STEP 8
+
 
 /**
  * main - Entry point
@@ -16,8 +17,8 @@ int main(void)
     unsigned int ui;
     void *addr;
 #if STEP >= 1
-    len = _printf("Let's try to printf a simple sentence.\n");
-    len2 = printf("Let's try to printf a simple sentence.\n");
+    len = _printf("Let's try %c to printf%c %d a simple sentence.\n", 'd', 'f', 69420);
+    len2 = printf("Let's try %c to printf%c %d a simple sentence.\n", 'd', 'f', 69420);
 #endif
 #if STEP >= 2
     ui = (unsigned int)INT_MAX + 1024;
@@ -46,8 +47,10 @@ int main(void)
     printf("Character:[%c]\n", 'H');
 #endif
 #if STEP >= 8
-    _printf("String:[%s]\n", "I am a string !");
-    printf("String:[%s]\n", "I am a string !");
+    len = _printf("String:[%s]\n", "I am a string !");
+    len2 = printf("String:[%s]\n", "I am a string !");
+    _printf("Length:[%d, %i]\n", len, len);
+    printf("Length:[%d, %i]\n", len2, len2);
 #endif
 #if STEP >= 9
     _printf("Address:[%p]\n", addr);
