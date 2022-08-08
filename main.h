@@ -15,5 +15,4 @@ int print_int(const char *format, va_list args, int i);
 int print_uns_int(const char *format, va_list args, int i);
 int (*get_format_func(const char *format, int i))(const char *, va_list, int);
 
-
 #endif /* MAIN_H */

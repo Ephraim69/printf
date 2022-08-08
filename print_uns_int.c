@@ -5,6 +5,7 @@
 * @format: the argument with the string to be printed and any format specifier
 * @args: the argument containing an unsigned int
 * @i: the index of %u in format, i.e. format[i]
+* Return: returns the number of characters printed
 */
 int print_uns_int(const char *format, va_list args, int i)
 {
@@ -29,7 +30,8 @@ int print_uns_int(const char *format, va_list args, int i)
 	}
 
 	b[j] = '\0';
-	while (b[++c]);
+	while (b[++c])
+		j = 0;
 
 	for (j = (c - 1); j >= 0; j--)
 		len += _putchar(b[j], len);

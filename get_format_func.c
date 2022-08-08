@@ -5,7 +5,7 @@
 * specifier
 * @format: the argument with the string to be printed and any format specifier
 * @i: the index of '%' in format, i.e. format[i]
-* Returns: returns a pointer to the right function
+* Return: returns a pointer to the right function
 */
 int (*get_format_func(const char *format, int i))(const char *, va_list, int)
 {

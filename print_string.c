@@ -5,6 +5,7 @@
 * @format: the argument with the string to be printed and any format specifier
 * @args: the argument containing a string
 * @i: the index of %s in format, i.e. format[i]
+* Return: returns the number of characters printed
 */
 int print_string(const char *format, va_list args, int i)
 {
