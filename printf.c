@@ -1,7 +1,7 @@
 #include "main.h"
 
 int format_int(int n, char b[], int len);
-char *format_uns_int(unsigned int n, char b[]);
+int format_uns_int(unsigned int n, char b[], int len);
 int _putchar(char c, int len);
 
 int _printf(const char *format, ...)
@@ -23,17 +23,12 @@ int _printf(const char *format, ...)
 				len += format_int(tmp, b, len);
 				i += 2;
 			}
-		/*	else if (format[i + 1] == 'u')
+			else if (format[i + 1] == 'u')
 			{
 				utmp = va_arg(args, unsigned int);
-				numStr = format_uns_int(utmp, b);
-
-				for (j = 0; numStr[j] != '\0'; j++)
-				{
-					buf[k++] = numStr[j];
-				}
+				len += format_uns_int(utmp, b, len);
 				i += 2;
-			}	*/
+			}
 		}
 
 		len += _putchar(format[i], len);
@@ -47,16 +42,14 @@ int _printf(const char *format, ...)
 int format_int(int n, char b[], int len)
 {
 
-	int i = 0, c = 0, c1 = 0;
-	int n1 = n;
-	int isNeg = 0;
-	char tmp;
+	int i = 0, c = 0, n1 = n, isNeg = 0;
+
 	len = 0;
 
 	if (n < 0)
 	{
-			isNeg = 1;
-			n1 = -n;
+		isNeg = 1;
+		n1 = -n;
 	}
 
 	while (1)
@@ -69,34 +62,25 @@ int format_int(int n, char b[], int len)
 		b[i++] = (n1 % 10) + '0';
 		n1 = n1 / 10;
 	}
+
 	if (isNeg == 1)
 		b[i++] = '-';
 	b[i] = '\0';
-	i = 0;
+
 	while (b[++c]);
 
-	c1 = c - 1;
-
-	for (i = 0; i < c/2; i++)
-	{
-		tmp = b[i];
-		b[i] = b[c1];
-		b[c1--] = tmp;
-	}
-	b[c] = '\0';
-
-	for (i = 0; b[i] != '\0'; i++)
+	for (i = c - 1; i >= 0; i--)
 		len += _putchar(b[i], len);
-	return (len);
 
+	return (len);
 }
 
-char *format_uns_int(unsigned int n, char b[])
+int format_uns_int(unsigned int n, char b[], int len)
 {
 
-	unsigned int i = 0, c = 0, c1 = 0;
-	unsigned int n1 = n;
-	char tmp;
+	unsigned int c = 0, n1 = n, c1 = 0, tmp = 0;
+	int i = 0;
+	len = 0;
 
 	while (1)
 	{
@@ -110,21 +94,12 @@ char *format_uns_int(unsigned int n, char b[])
 	}
 
 	b[i] = '\0';
-	i = 0;
 	while (b[++c]);
 
-	c1 = c - 1;
+	for (i = (c - 1); i >= 0; i--)
+		len += _putchar(b[i], len);
 
-	for (i = 0; i < c/2; i++)
-	{
-		tmp = b[i];
-		b[i] = b[c1];
-		b[c1--] = tmp;
-	}
-	b[c] = '\0';
-
-	return (b);
-
+	return (len);
 }
 
 int _putchar(char c, int len)
