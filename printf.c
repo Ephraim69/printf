@@ -25,7 +25,6 @@ int _printf(const char *format, ...)
 				continue;
 			}
 			len += ptr(format, args, i);
-			va_arg(args, void *);
 			i += 2;
 		}
 
