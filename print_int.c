@@ -1,12 +1,20 @@
 #include "main.h"
 
+/**
+* print_int - prints an integer
+* @format: the argument with the string to be printed and any format specifier
+* @args: the argument containing an int
+* @i: the index of %d or %i in format, i.e. format[i]
+*/
 int print_int(const char *format, va_list args, int i)
 {
 	int n = va_arg(args, int);
 	int j = 0, c = 0, n1 = n, isNeg = 0;
 	char b[20];
-
 	int len = 0;
+
+	(void) format;
+	(void) i;
 
 	if (n < 0)
 	{
