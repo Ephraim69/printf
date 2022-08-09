@@ -29,7 +29,7 @@ int (*get_format_func(const char *format, int i))(va_list)
 		return (NULL);
 }
 /**
-* print_percent - prints % 
+* print_percent - prints %
 * @args: the argument containing an int
 * Return: returns the number of characters printed
 */
